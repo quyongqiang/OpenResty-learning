@@ -28,10 +28,36 @@ http://www.stuq.org/my/courses/study/1015
 ```
 
 ### 3.3 NGINX MODULE不足
-
+```
 传统的nginx传统模块redis2_query指令不太灵活，无法进行业务逻辑判断，
 如果想实现复杂的业务逻辑判断，可能需要多个location配合来实现，如果配置错误nginx服务会无法启动。
 如果使用lua代码，则业务逻辑非常灵活，代码错误不会影响nginx整体。
 redis_lua pipeline
-
+```
 ### 3.4 唯一实例
+
+```
+ 生产者/消费者
+ 
+ p1  \                                 / c1
+      \                              /
+ p2 ---  Queue(Redis/Kafka/RabbitMQ) ---- c2
+      /                              \
+ p3 /                                  \  c3
+ 
+ 有时需要精准的控制生产者或消费者的数量
+ ngx.worker.id()
+ ngx.timer.at
+ pcall
+ 
+ 
+ # 总结/实现
+ 单一实例
+ 定期执行
+ 容错
+ ```
+ 
+ 
+ 
+ 
+ 

@@ -57,6 +57,29 @@ redis_lua pipeline
  容错
  ```
  
+ ### 3.5 redis 接口封装（其他数据库理念相通）
+ ```
+ - 需要隐藏的2个信息，对业务来说
+ connect
+ set_keepalive
+ 
+ - 合并相同行为的api
+ 合并get和set
+ 
+ ```
+ 
+ ### 3.6 普通模块与实例化模块
+ ```
+ lua module is global
+ ```
+ 
+ ### 3.7 模块实例化的"坑"
+ 
+ 对全局变量说NO
+
+ 检查工具（lua-releng）
+ 
+ 
  
  
  

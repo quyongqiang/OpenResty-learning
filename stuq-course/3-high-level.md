@@ -10,6 +10,8 @@ http://www.stuq.org/my/courses/study/1015
 5. connetion close
 可以把nginx -> redis的连接改成长连接，减少认证步骤，提高性能。
 10s内都使用长连接，get/set指令也可以集中一次发送。
+
+# 总结
 - 善用长连接
 - 正确设置连接池大小
 - 链路首次授权认证
@@ -18,9 +20,18 @@ http://www.stuq.org/my/courses/study/1015
 
 
 
-### 3.1 redis 授权登录压力测试
+### 3.2 redis 授权登录压力测试
 ```
 使用ab对nginx --> redis 测试，
 - 短连接情况下，并发在3700
 - 长连接情况下，并发在8000以上
 ```
+
+### 3.3 NGINX MODULE不足
+
+传统的nginx传统模块redis2_query指令不太灵活，无法进行业务逻辑判断，
+如果想实现复杂的业务逻辑判断，可能需要多个location配合来实现，如果配置错误nginx服务会无法启动。
+如果使用lua代码，则业务逻辑非常灵活，代码错误不会影响nginx整体。
+redis_lua pipeline
+
+### 3.4 唯一实例
